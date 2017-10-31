@@ -1,0 +1,9 @@
+[submodule "pack/shenmin/start/vim-one"]
+	path = pack/shenmin/start/vim-one
+	url = git@github.com:rakr/vim-one.git
+[submodule "pack/shenmin/start/vim-airline"]
+	path = pack/shenmin/start/vim-airline
+	url = git@github.com:vim-airline/vim-airline.git
+[submodule "pack/shenmin/start/vim-fugitive"]
+	path = pack/shenmin/start/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
