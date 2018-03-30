@@ -11,10 +11,11 @@ set relativenumber
 
 " Tab
 set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " set guioptions-=m  "remove menu bar
 set guioptions-=T  "toolbar
-
 
 "----------Visuals-----------"
 colorscheme one
