@@ -7,3 +7,6 @@
 [submodule "pack/shenmin/start/vim-fugitive"]
 	path = pack/shenmin/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
+[submodule "pack/shenmin/start/vim-surround"]
+	path = pack/shenmin/start/vim-surround
+	url = https://github.com/tpope/vim-surround
