@@ -7,6 +7,3 @@
 [submodule "pack/plugins/start/vim-vue"]
 	path = pack/plugins/start/vim-vue
 	url = git@github.com:posva/vim-vue.git
-[submodule "pack/plugins/start/vim-go"]
-	path = pack/plugins/start/vim-go
-	url = git@github.com:fatih/vim-go
