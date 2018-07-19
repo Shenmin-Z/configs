@@ -10,11 +10,12 @@ set number
 set relativenumber
 
 " Tab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
-" set guioptions-=m  "remove menu bar
+" GVIM
+set guioptions-=m  "remove menu bar
 set guioptions-=T  "toolbar
 
 " Visuals
