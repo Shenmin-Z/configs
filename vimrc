@@ -18,15 +18,21 @@ set expandtab
 set encoding=utf-8
 set t_CO=256
 
-" Set font
-set guifont=Fira_Code:h11
-
 " Search
 set hlsearch
 set incsearch
 
+" ReaLoad a file if was changed outside of Vim
+set autoread
+
 " Save
 noremap <Leader>w :w<CR>
+if exists(':YcmCompleter')
+  noremap <Leader>w :YcmCompleter Format<CR>:w<CR>
+endif
+
+" No highlight
+nnoremap <C-C> :nohlsearch<CR><C-C>
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
@@ -35,32 +41,26 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 Plug 'scrooloose/nerdtree'
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
+Plug 'joshdick/onedark.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-gitgutter'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
-
-colorscheme onedark
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
-
-" ----------*---------- ----------*---------- ----------*---------- "
-
-" GVIM
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "toolbar
-set guioptions-=L  "remove left-hand scroll bar
-set guioptions-=r  "remove left-hand scroll bar
-
-" Default to system clipboard
-set clipboard=unnamed
+map <C-m> :NERDTreeFind<CR>
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
@@ -71,3 +71,15 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
+" Ycm
+map <C-]> :YcmCompleter GoTo<CR>
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" fzf
+nmap <Leader>e :Buffers<CR>
+nmap <Leader>r :Files<CR>
+nmap <Leader>t :Tags<CR>
+
+" emmet
+" let g:user_emmet_expandabbr_key='<Tab>'
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
