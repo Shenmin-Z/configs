@@ -34,6 +34,12 @@ endif
 " No highlight
 nnoremap <C-C> :nohlsearch<CR><C-C>
 
+" Source vimrc
+nnoremap so :so<space>$MYVIMRC<CR>
+
+" edit vimrc
+nnoremap ev :e<space>$MYVIMRC<CR>
+
 " ----------*---------- ----------*---------- ----------*---------- "
 
 " Plugins will be downloaded under the specified directory.
@@ -42,16 +48,25 @@ call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
-Plug 'joshdick/onedark.vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+
+if has('win32')
+  Plug 'joshdick/onedark.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'peitalin/vim-jsx-typescript'
+endif
+
+if has('unix')
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -64,22 +79,34 @@ map <C-m> :NERDTreeFind<CR>
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
-" CtrlP
-let g:ctrlp_map = '<C-p>' 
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+if has('win32')
+  " CtrlP
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+  nmap <Leader>e :CtrlP<CR>
+  nmap <Leader>r :CtrlPBuffer<CR>
+  nmap <Leader>t :CtrlPMRU<CR>
+
+  " Fullscreen
+  map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> 
+endif
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
 " Ycm
 map <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_always_populate_location_list = 1
 
-" fzf
-nmap <Leader>e :Buffers<CR>
-nmap <Leader>r :Files<CR>
-nmap <Leader>t :Tags<CR>
+if has('unix')
+
+  " fzf
+  nmap <Leader>e :Buffers<CR>
+  nmap <Leader>r :Files<CR>
+  nmap <Leader>t :Tags<CR>
+
+endif
 
 " emmet
 " let g:user_emmet_expandabbr_key='<Tab>'
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
