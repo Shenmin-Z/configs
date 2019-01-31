@@ -54,7 +54,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 if has('win32')
   Plug 'joshdick/onedark.vim'
@@ -110,3 +110,5 @@ endif
 " let g:user_emmet_expandabbr_key='<Tab>'
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
+" Delete buffer without cloing window
+nnoremap cc :bp\|bd #<CR>

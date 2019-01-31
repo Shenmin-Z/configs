@@ -18,3 +18,5 @@ set clipboard=unnamed
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
+" Maximize
+set lines=999 columns=999
