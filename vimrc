@@ -21,6 +21,8 @@ set t_CO=256
 " Search
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 
 " ReaLoad a file if was changed outside of Vim
 set autoread
@@ -35,10 +37,10 @@ endif
 nnoremap <C-C> :nohlsearch<CR><C-C>
 
 " Source vimrc
-nnoremap so :so<space>$MYVIMRC<CR>
+nnoremap <Leader>s :so<space>$MYVIMRC<CR>
 
 " edit vimrc
-nnoremap ev :e<space>$MYVIMRC<CR>
+nnoremap <Leader>e :e<space>$MYVIMRC<CR>
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
@@ -55,6 +57,11 @@ Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " Plug 'Valloric/YouCompleteMe'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'google/vim-searchindex'
+Plug 'mileszs/ack.vim'
 
 if has('win32')
   Plug 'joshdick/onedark.vim'
@@ -82,9 +89,9 @@ map <C-m> :NERDTreeFind<CR>
 if has('win32')
   " CtrlP
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-  nmap <Leader>e :CtrlP<CR>
+"  nmap <Leader>e :CtrlP<CR>
   nmap <Leader>r :CtrlPBuffer<CR>
-  nmap <Leader>t :CtrlPMRU<CR>
+"  nmap <Leader>t :CtrlPMRU<CR>
 
   " Fullscreen
   map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> 
@@ -111,4 +118,27 @@ endif
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Delete buffer without cloing window
-nnoremap cc :bp\|bd #<CR>
+nnoremap <Leader>c :bp\|bd #<CR>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  " set grepprg=ag\ --nogroup\ --nocolor
+  let g:ackprg = 'ag --vimgrep'
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching = 0
+endif
+
+" Prettier
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'false'
+
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
+
+" Ack.vim
+nnoremap <Leader>a :Ack!<Space>
