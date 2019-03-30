@@ -53,7 +53,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 " Plug 'Valloric/YouCompleteMe'
@@ -100,9 +100,9 @@ endif
 " ----------*---------- ----------*---------- ----------*---------- "
 
 " Ycm
-map <C-]> :YcmCompleter GoTo<CR>
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_always_populate_location_list = 1
+"map <C-]> :YcmCompleter GoTo<CR>
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_always_populate_location_list = 1
 
 if has('unix')
 
@@ -142,3 +142,11 @@ let g:prettier#config#bracket_spacing = 'true'
 
 " Ack.vim
 nnoremap <Leader>a :Ack!<Space>
+
+" NerdCommenter
+let g:NERDDefaultAlign = 'left'
+
+set backupdir=~/tmp
+set directory=~/tmp
+set undodir=~/tmp
+
