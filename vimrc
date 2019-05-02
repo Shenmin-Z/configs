@@ -29,9 +29,6 @@ set autoread
 
 " Save
 noremap <Leader>w :w<CR>
-if exists(':YcmCompleter')
-  noremap <Leader>w :YcmCompleter Format<CR>:w<CR>
-endif
 
 " No highlight
 nnoremap <C-C> :nohlsearch<CR><C-C>
@@ -53,10 +50,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -68,6 +63,8 @@ if has('win32')
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'Quramy/tsuquyomi'
 endif
 
 if has('unix')
@@ -98,24 +95,13 @@ if has('win32')
 endif
 
 " ----------*---------- ----------*---------- ----------*---------- "
-
-" Ycm
-"map <C-]> :YcmCompleter GoTo<CR>
-"let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_always_populate_location_list = 1
-
 if has('unix')
-
   " fzf
   nmap <Leader>e :Buffers<CR>
   nmap <Leader>r :Files<CR>
   nmap <Leader>t :Tags<CR>
 
 endif
-
-" emmet
-" let g:user_emmet_expandabbr_key='<Tab>'
-" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
