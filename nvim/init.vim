@@ -46,6 +46,7 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
@@ -55,62 +56,39 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'google/vim-searchindex'
-Plug 'mileszs/ack.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'iCyMind/NeoSolarized'
+Plug 'scrooloose/nerdtree'
 
-if has('win32')
-  Plug 'joshdick/onedark.vim'
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'Quramy/tsuquyomi'
-endif
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
-if has('unix')
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-endif
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For async completion
+Plug 'Shougo/deoplete.nvim'
+" For Denite features
+Plug 'Shougo/denite.nvim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
-" ----------*---------- ----------*---------- ----------*---------- "
+let g:deoplete#enable_at_startup = 1
 
-if has('win32')
-  " CtrlP
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"  nmap <Leader>e :CtrlP<CR>
-  nmap <Leader>r :CtrlPBuffer<CR>
-"  nmap <Leader>t :CtrlPMRU<CR>
+set termguicolors
+colorscheme NeoSolarized
+set background=light
 
-  " Fullscreen
-  map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> 
-endif
+" fzf
+nmap <Leader>r :Buffers<CR>
+nmap <C-P> :Files<CR>
+"nmap <Leader>t :Tags<CR>
 
-" ----------*---------- ----------*---------- ----------*---------- "
-if has('unix')
-  " fzf
-  nmap <Leader>e :Buffers<CR>
-  nmap <Leader>r :Files<CR>
-  nmap <Leader>t :Tags<CR>
-
-endif
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  " set grepprg=ag\ --nogroup\ --nocolor
-  let g:ackprg = 'ag --vimgrep'
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
-endif
 
 " Prettier
 " single quotes over double quotes
@@ -119,13 +97,18 @@ let g:prettier#config#single_quote = 'false'
 " print spaces between brackets
 let g:prettier#config#bracket_spacing = 'true'
 
-" Ack.vim
-nnoremap <Leader>a :Ack!<Space>
-
 " NerdCommenter
 let g:NERDDefaultAlign = 'left'
+
+" GitGutter
+let g:gitgutter_override_sign_column_highlight = 0
 
 set backupdir=~/tmp
 set directory=~/tmp
 set undodir=~/tmp
+
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 
