@@ -1,9 +1,4 @@
-syntax on
-
-set backspace=indent,eol,start
 let mapleader = ' '
-
-filetype plugin indent on
 
 " Show line number
 set number
@@ -29,6 +24,7 @@ set autoread
 
 " Save
 noremap <Leader>w :w<CR>
+noremap <Leader>q <C-W><C-C>
 
 " No highlight
 nnoremap <C-C> :nohlsearch<CR><C-C>
@@ -43,39 +39,32 @@ nnoremap <Leader>e :e<space>$MYVIMRC<CR>
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'iCyMind/NeoSolarized'
 
-" Declare the list of plugins.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdcommenter'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'google/vim-searchindex'
-Plug 'pangloss/vim-javascript'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'iCyMind/NeoSolarized'
-Plug 'scrooloose/nerdtree'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'google/vim-searchindex'
+  Plug 'scrooloose/nerdtree'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
 
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-" For async completion
-Plug 'Shougo/deoplete.nvim'
-" For Denite features
-Plug 'Shougo/denite.nvim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
 
-" List ends here. Plugins become visible to Vim after this call.
+  Plug 'tpope/vim-surround'
+
+  Plug 'leafgarland/typescript-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'yarn install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  Plug 'Quramy/tsuquyomi'
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 call plug#end()
-
-let g:deoplete#enable_at_startup = 1
 
 set termguicolors
 colorscheme NeoSolarized
@@ -83,7 +72,8 @@ set background=light
 
 " fzf
 nmap <Leader>r :Buffers<CR>
-nmap <C-P> :Files<CR>
+nmap <C-P> :GFiles<CR>
+nmap <C-G> :Rg<CR>
 "nmap <Leader>t :Tags<CR>
 
 
@@ -111,4 +101,3 @@ let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
-
