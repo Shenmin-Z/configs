@@ -35,9 +35,10 @@ nnoremap <Leader>s :so<space>$MYVIMRC<CR>
 " edit vimrc
 nnoremap <Leader>e :e<space>$MYVIMRC<CR>
 
+set hidden
+
 " ----------*---------- ----------*---------- ----------*---------- "
 
-" Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -55,6 +56,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'tpope/vim-surround'
 
+  " JavaScript/TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
@@ -62,8 +64,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-  Plug 'Quramy/tsuquyomi'
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 call plug#end()
 
 set termguicolors
@@ -89,15 +91,33 @@ let g:prettier#config#bracket_spacing = 'true'
 
 " NerdCommenter
 let g:NERDDefaultAlign = 'left'
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 " GitGutter
 let g:gitgutter_override_sign_column_highlight = 0
+
+" NerdTree
+nmap <Leader>n :NERDTree
 
 set backupdir=~/tmp
 set directory=~/tmp
 set undodir=~/tmp
 
+" COC
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> dp <Plug>(coc-diagnostic-prev)
+nmap <silent> dn <Plug>(coc-diagnostic-next)
+
+
+" Airline
+
+" Cursor shape
 let &t_ti.="\e[1 q"
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
 let &t_te.="\e[0 q"
+
+" Neovim terminal
+au TermOpen * setlocal nonumber norelativenumber
+tnoremap <Esc> <C-\><C-n>
