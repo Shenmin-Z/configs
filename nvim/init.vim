@@ -1,3 +1,5 @@
+set nocompatible
+
 let mapleader = ' '
 
 " Show line number
@@ -22,12 +24,12 @@ set smartcase
 " ReaLoad a file if was changed outside of Vim
 set autoread
 
-" Save
 noremap <Leader>w :w<CR>
 noremap <Leader>q <C-W><C-C>
+noremap <Leader>l :set cursorcolumn!<CR>
 
 " No highlight
-nnoremap <C-C> :nohlsearch<CR><C-C>
+nnoremap <C-C> :nohl<CR><C-C>
 
 " Source vimrc
 nnoremap <Leader>s :so<space>$MYVIMRC<CR>
@@ -35,13 +37,17 @@ nnoremap <Leader>s :so<space>$MYVIMRC<CR>
 " edit vimrc
 nnoremap <Leader>e :e<space>$MYVIMRC<CR>
 
+set nofixendofline
+
 set hidden
+
+set diffopt=vertical
+
+set updatetime=100
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'iCyMind/NeoSolarized'
 
   Plug 'scrooloose/nerdcommenter'
@@ -73,20 +79,16 @@ colorscheme NeoSolarized
 set background=light
 
 " fzf
-nmap <Leader>r :Buffers<CR>
+nmap <Leader>b :Buffers<CR>
 nmap <C-P> :GFiles<CR>
-nmap <C-G> :Rg<CR>
-"nmap <Leader>t :Tags<CR>
-
+nmap <Leader>m :Commands<CR>
+"nmap <C-G> :Rg
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
 
 " Prettier
-" single quotes over double quotes
 let g:prettier#config#single_quote = 'false'
-
-" print spaces between brackets
 let g:prettier#config#bracket_spacing = 'true'
 
 " NerdCommenter
@@ -96,9 +98,13 @@ vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 " GitGutter
 let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_map_keys = 0
 
 " NerdTree
 nmap <Leader>n :NERDTree
+nmap <Leader>nf :NERDTreeFind<CR>
+nmap <Leader>nc :NERDTreeClose<CR>
+nmap <Leader>nv :NERDTreeVCS<CR>
 
 set backupdir=~/tmp
 set directory=~/tmp
@@ -108,9 +114,6 @@ set undodir=~/tmp
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap <silent> dn <Plug>(coc-diagnostic-next)
-
-
-" Airline
 
 " Cursor shape
 let &t_ti.="\e[1 q"
