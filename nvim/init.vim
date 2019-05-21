@@ -49,6 +49,7 @@ set updatetime=100
 
 call plug#begin('~/.vim/plugged')
   Plug 'iCyMind/NeoSolarized'
+  Plug 'miyakogi/conoline.vim'
 
   Plug 'scrooloose/nerdcommenter'
   Plug 'google/vim-searchindex'
@@ -82,7 +83,6 @@ set background=light
 nmap <Leader>b :Buffers<CR>
 nmap <C-P> :GFiles<CR>
 nmap <Leader>m :Commands<CR>
-"nmap <C-G> :Rg
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
@@ -110,10 +110,17 @@ set backupdir=~/tmp
 set directory=~/tmp
 set undodir=~/tmp
 
+" Fugitive
+nmap <Leader>gb :Gblame<CR>
+
 " COC
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap <silent> dn <Plug>(coc-diagnostic-next)
+nmap <leader>rn <Plug>(coc-rename)
+
+" Cursor Line
+let g:conoline_auto_enable = 1
 
 " Cursor shape
 let &t_ti.="\e[1 q"
