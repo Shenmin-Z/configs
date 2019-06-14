@@ -48,7 +48,7 @@ set updatetime=100
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
-  Plug 'iCyMind/NeoSolarized'
+  Plug 'altercation/vim-colors-solarized'
   Plug 'miyakogi/conoline.vim'
 
   Plug 'scrooloose/nerdcommenter'
@@ -62,6 +62,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'
 
   Plug 'tpope/vim-surround'
+  Plug 'Raimondi/delimitMate'
 
   " JavaScript/TypeScript
   Plug 'leafgarland/typescript-vim'
@@ -75,9 +76,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 call plug#end()
 
-set termguicolors
-colorscheme NeoSolarized
 set background=light
+colorscheme solarized
 
 " fzf
 nmap <Leader>b :Buffers<CR>
