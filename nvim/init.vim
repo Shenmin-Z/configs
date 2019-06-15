@@ -97,7 +97,6 @@ nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 
 " GitGutter
-let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_map_keys = 0
 
 " NerdTree
@@ -121,12 +120,6 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Cursor Line
 let g:conoline_auto_enable = 1
-
-" Cursor shape
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
 
 " Neovim terminal
 au TermOpen * setlocal nonumber norelativenumber
