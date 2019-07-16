@@ -1,3 +1,18 @@
 {
-  "tsserver.npm": "/home/sam/.nvm/versions/node/v10.15.3/bin/npm"
+  "tsserver.npm": "/home/sam/.nvm/versions/node/v10.15.3/bin/npm",
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ]
+    }
+  },
+  "coc.preferences.formatOnSaveFiletypes": []
 }

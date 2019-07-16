@@ -52,8 +52,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'miyakogi/conoline.vim'
 
   Plug 'scrooloose/nerdcommenter'
-  Plug 'google/vim-searchindex'
   Plug 'scrooloose/nerdtree'
+  Plug 'google/vim-searchindex'
 
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
@@ -64,16 +64,28 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'Raimondi/delimitMate'
 
+  " Completion
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+
+  " HTML
+  Plug 'mattn/emmet-vim'
+
+  " Styled Component
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+  " Template 
+  "Plug 'maxmellon/vim-jsx-pretty'
+
   " JavaScript/TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
-  Plug 'maxmellon/vim-jsx-pretty'
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+  " Go
+  " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 set background=light
@@ -104,23 +116,30 @@ nmap <Leader>n :NERDTree
 nmap <Leader>nf :NERDTreeFind<CR>
 nmap <Leader>nc :NERDTreeClose<CR>
 nmap <Leader>nv :NERDTreeVCS<CR>
-
-set backupdir=~/tmp
-set directory=~/tmp
-set undodir=~/tmp
+nmap <Leader>nr :NERDTreeRefreshRoot<CR>
 
 " Fugitive
 nmap <Leader>gb :Gblame<CR>
 
 " COC
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
+command! -nargs=0 Format :call CocAction('format')
+nmap <leader>f :Format<CR>
 
 " Cursor Line
 let g:conoline_auto_enable = 1
 
+" Emmit
+let g:user_emmet_leader_key='<tab>'
+
 " Neovim terminal
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
+
+set backupdir=~/tmp
+set directory=~/tmp
+set undodir=~/tmp
