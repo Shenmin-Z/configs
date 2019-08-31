@@ -71,21 +71,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
 
   " Styled Component
-  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
-  " Template 
-  "Plug 'maxmellon/vim-jsx-pretty'
+  "Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
   " JavaScript/TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  "Plug 'maxmellon/vim-jsx-pretty'
+
 
   " Go
   " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+  " Formatter
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'yarn install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
 set background=light
@@ -93,8 +94,9 @@ colorscheme solarized
 
 " fzf
 nmap <Leader>b :Buffers<CR>
-nmap <C-P> :GFiles<CR>
+nmap <C-P> :GFiles --recurse-submodules<CR>
 nmap <Leader>m :Commands<CR>
+nmap <Leader>rg yiwq:aRg <Esc>p<CR>
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
@@ -124,6 +126,7 @@ nmap <Leader>gb :Gblame<CR>
 " COC
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
 nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
@@ -134,7 +137,7 @@ nmap <leader>f :Format<CR>
 let g:conoline_auto_enable = 1
 
 " Emmit
-let g:user_emmet_leader_key='<tab>'
+let g:user_emmet_leader_key='<s-tab>'
 
 " Neovim terminal
 au TermOpen * setlocal nonumber norelativenumber
