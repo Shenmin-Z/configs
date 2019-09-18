@@ -45,6 +45,8 @@ set diffopt=vertical
 
 set updatetime=100
 
+:command! CP let @0 = expand('%:p')
+
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
@@ -97,6 +99,12 @@ nmap <Leader>b :Buffers<CR>
 nmap <C-P> :GFiles --recurse-submodules<CR>
 nmap <Leader>m :Commands<CR>
 nmap <Leader>rg yiwq:aRg <Esc>p<CR>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Delete buffer without cloing window
 nnoremap <Leader>c :bp\|bd #<CR>
@@ -114,11 +122,11 @@ vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
 let g:gitgutter_map_keys = 0
 
 " NerdTree
+let NERDTreeShowHidden=1
 nmap <Leader>n :NERDTree
 nmap <Leader>nf :NERDTreeFind<CR>
 nmap <Leader>nc :NERDTreeClose<CR>
 nmap <Leader>nv :NERDTreeVCS<CR>
-nmap <Leader>nr :NERDTreeRefreshRoot<CR>
 
 " Fugitive
 nmap <Leader>gb :Gblame<CR>
