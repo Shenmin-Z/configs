@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
 
   " Completion
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
   " HTML
   Plug 'mattn/emmet-vim'
