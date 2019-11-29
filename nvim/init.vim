@@ -41,17 +41,14 @@ set nofixendofline
 
 set hidden
 
-set diffopt=vertical
-
 set updatetime=100
 
-:command! CP let @0 = expand('%:p')
+set termguicolors
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
-  Plug 'altercation/vim-colors-solarized'
-  Plug 'miyakogi/conoline.vim'
+  Plug 'morhetz/gruvbox'
 
   Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
@@ -81,7 +78,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'peitalin/vim-jsx-typescript'
   "Plug 'maxmellon/vim-jsx-pretty'
 
-
   " Go
   " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -91,8 +87,8 @@ call plug#begin('~/.vim/plugged')
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 call plug#end()
 
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme gruvbox
 
 " fzf
 nmap <Leader>b :Buffers<CR>
@@ -105,9 +101,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-
-" Delete buffer without cloing window
-nnoremap <Leader>c :bp\|bd #<CR>
 
 " Prettier
 let g:prettier#config#single_quote = 'false'
@@ -140,9 +133,6 @@ nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 Format :call CocAction('format')
 nmap <leader>f :Format<CR>
-
-" Cursor Line
-let g:conoline_auto_enable = 1
 
 " Emmit
 let g:user_emmet_leader_key='<s-tab>'
