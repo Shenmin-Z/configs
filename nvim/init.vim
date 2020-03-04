@@ -76,15 +76,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
-  "Plug 'maxmellon/vim-jsx-pretty'
 
   " Go
   " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+  " Haskell
+  Plug 'neovimhaskell/haskell-vim'
+
   " Formatter
-  Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  Plug 'godlygeek/tabular'
 call plug#end()
 
 set background=dark
@@ -105,6 +106,7 @@ command! -bang -nargs=* Rg
 " Prettier
 let g:prettier#config#single_quote = 'false'
 let g:prettier#config#bracket_spacing = 'true'
+nnoremap gp :silent %!prettier --no-config --stdin --stdin-filepath % --trailing-comma all --single-quote<CR>
 
 " NerdCommenter
 let g:NERDDefaultAlign = 'left'

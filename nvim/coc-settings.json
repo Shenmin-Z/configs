@@ -1,4 +1,5 @@
 {
+  "diagnostic.infoSign": "<<",
   "coc.preferences.formatOnSaveFiletypes": [],
   "languageserver": {
     "haskell": {
