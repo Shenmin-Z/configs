@@ -10,6 +10,8 @@ set relativenumber
 set tabstop=2
 set shiftwidth=2
 set expandtab
+nnoremap <Leader>4 :setlocal shiftwidth=4 \| setlocal tabstop=4<CR>
+nnoremap <Leader>2 :setlocal shiftwidth=2 \| setlocal tabstop=2<CR>
 
 " Visuals
 set encoding=utf-8
@@ -79,6 +81,7 @@ call plug#begin('~/.vim/plugged')
 
   " Go
   " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'sebdah/vim-delve'
 
   " Haskell
   Plug 'neovimhaskell/haskell-vim'
@@ -142,6 +145,8 @@ let g:user_emmet_leader_key='<s-tab>'
 " Neovim terminal
 au TermOpen * setlocal nonumber norelativenumber
 tnoremap <Esc> <C-\><C-n>
+
+set clipboard+=unnamedplus
 
 set backupdir=~/tmp
 set directory=~/tmp

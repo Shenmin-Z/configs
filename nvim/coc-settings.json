@@ -2,21 +2,12 @@
   "diagnostic.infoSign": "<<",
   "coc.preferences.formatOnSaveFiletypes": [],
   "languageserver": {
-    "haskell": {
-      "command": "hie-wrapper",
-      "rootPatterns": [
-        ".stack.yaml",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
       "initializationOptions": {
-        "languageServerHaskell": {
-        }
+        "usePlaceholders": true
       }
     }
   }
