@@ -26,6 +26,9 @@ set smartcase
 " ReaLoad a file if was changed outside of Vim
 set autoread
 
+" Giff target<-local copy->merge
+set diffopt+=vertical
+
 noremap <Leader>w :w<CR>
 noremap <Leader>q <C-W><C-C>
 noremap <Leader>l :set cursorcolumn!<CR>
@@ -66,7 +69,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
 
   " Completion
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " HTML
   Plug 'mattn/emmet-vim'
@@ -95,6 +98,7 @@ set background=dark
 colorscheme gruvbox
 
 " fzf
+let g:fzf_preview_window = ''
 nmap <Leader>b :Buffers<CR>
 nmap <C-P> :GFiles --recurse-submodules<CR>
 nmap <Leader>m :Commands<CR>
