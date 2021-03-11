@@ -152,6 +152,7 @@ tnoremap <Esc> <C-\><C-n>
 
 set clipboard+=unnamedplus
 
-set backupdir=~/tmp
-set directory=~/tmp
-set undodir=~/tmp
+set nobackup
+set nowritebackup
+set noundofile
+set noswapfile
