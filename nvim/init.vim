@@ -10,8 +10,8 @@ set relativenumber
 set tabstop=2
 set shiftwidth=2
 set expandtab
-nnoremap <Leader>4 :setlocal shiftwidth=4 \| setlocal tabstop=4<CR>
-nnoremap <Leader>2 :setlocal shiftwidth=2 \| setlocal tabstop=2<CR>
+nnoremap <Leader>4 :setlocal shiftwidth=4 tabstop=4<CR>
+nnoremap <Leader>2 :setlocal shiftwidth=2 tabstop=2<CR>
 
 " Visuals
 set encoding=utf-8
@@ -22,6 +22,8 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+" normal regex
+nnoremap / /\v
 
 " ReaLoad a file if was changed outside of Vim
 set autoread
@@ -29,7 +31,7 @@ set autoread
 " Giff target<-local copy->merge
 set diffopt+=vertical
 
-noremap <Leader>w :w<CR>
+noremap <Leader>w :write<CR>
 noremap <Leader>q <C-W><C-C>
 noremap <Leader>l :set cursorcolumn!<CR>
 
@@ -37,10 +39,12 @@ noremap <Leader>l :set cursorcolumn!<CR>
 nnoremap <C-C> :nohl<CR><C-C>
 
 " Source vimrc
-nnoremap <Leader>s :so<space>$MYVIMRC<CR>
-
+nnoremap <Leader>s :source<space>$MYVIMRC<CR>
 " edit vimrc
-nnoremap <Leader>e :e<space>$MYVIMRC<CR>
+nnoremap <Leader>e :edit<space>$MYVIMRC<CR>
+
+" open help vertically
+cabbrev h vertical help
 
 set nofixendofline
 
@@ -49,6 +53,17 @@ set hidden
 set updatetime=100
 
 set termguicolors
+
+" Neovim terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
+tnoremap <Esc> <C-\><C-n>
+
+set clipboard+=unnamedplus
+
+set nobackup
+set nowritebackup
+set noundofile
+set noswapfile
 
 " ----------*---------- ----------*---------- ----------*---------- "
 
@@ -74,23 +89,16 @@ call plug#begin('~/.vim/plugged')
   " HTML
   Plug 'mattn/emmet-vim'
 
-  " Styled Component
-  "Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-
   " JavaScript/TypeScript
   Plug 'leafgarland/typescript-vim'
   Plug 'pangloss/vim-javascript'
   Plug 'peitalin/vim-jsx-typescript'
 
   " Go
-  " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'sebdah/vim-delve'
 
-  " Haskell
-  Plug 'neovimhaskell/haskell-vim'
-
   " Formatter
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'json', 'markdown', 'html'] }
   Plug 'godlygeek/tabular'
 call plug#end()
 
@@ -99,10 +107,11 @@ colorscheme gruvbox
 
 " fzf
 let g:fzf_preview_window = ''
-nmap <Leader>b :Buffers<CR>
-nmap <C-P> :GFiles --recurse-submodules<CR>
-nmap <Leader>m :Commands<CR>
-nmap <Leader>rg yiwq:aRg <Esc>p<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <C-P> :GFiles --recurse-submodules<CR>
+nnoremap <Leader>m :Commands<CR>
+nnoremap <Leader>rg yiw:Rg <C-R>"<CR>
+nnoremap <Leader>rr yiw:Rg <C-R>" <C-R>%
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
@@ -117,8 +126,8 @@ nnoremap gp :silent %!prettier --no-config --stdin --stdin-filepath % --trailing
 
 " NerdCommenter
 let g:NERDDefaultAlign = 'left'
-nmap <C-_>   <Plug>NERDCommenterToggle
-vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
 " GitGutter
 let g:gitgutter_map_keys = 0
@@ -145,14 +154,3 @@ nmap <leader>f :Format<CR>
 
 " Emmit
 let g:user_emmet_leader_key='<s-tab>'
-
-" Neovim terminal
-au TermOpen * setlocal nonumber norelativenumber
-tnoremap <Esc> <C-\><C-n>
-
-set clipboard+=unnamedplus
-
-set nobackup
-set nowritebackup
-set noundofile
-set noswapfile
