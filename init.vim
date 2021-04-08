@@ -77,7 +77,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'airblade/vim-gitgutter'
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 
   Plug 'tpope/vim-surround'
@@ -90,9 +90,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
 
   " JavaScript/TypeScript
-  Plug 'leafgarland/typescript-vim'
-  Plug 'pangloss/vim-javascript'
-  Plug 'peitalin/vim-jsx-typescript'
+  Plug 'HerringtonDarkholme/yats.vim'
 
   " Go
   Plug 'sebdah/vim-delve'
@@ -111,7 +109,7 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <C-P> :GFiles --recurse-submodules<CR>
 nnoremap <Leader>m :Commands<CR>
 nnoremap <Leader>rg yiw:Rg <C-R>"<CR>
-nnoremap <Leader>rr yiw:Rg <C-R>" <C-R>%
+nnoremap <Leader>rr yiw:Rg <C-R>" <C-R>%<C-F>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
@@ -151,6 +149,9 @@ nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 Format :call CocAction('format')
 nmap <leader>f :Format<CR>
+"let g:coc_filetype_map = {
+"  \ 'tsx': 'typescript.tsx',
+"  \ }
 
 " Emmit
 let g:user_emmet_leader_key='<s-tab>'
