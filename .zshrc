@@ -1,4 +1,4 @@
-export ZSH="/home/buyabs.corp/sz9h/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 plugins=(git zsh-syntax-highlighting vi-mode)
 
