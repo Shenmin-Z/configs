@@ -68,36 +68,37 @@ set noswapfile
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
-  Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'scrooloose/nerdtree'
-  Plug 'google/vim-searchindex'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'google/vim-searchindex'
 
-  Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
-  Plug 'tpope/vim-surround'
-  Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'Raimondi/delimitMate'
 
-  " Completion
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  " HTML
-  Plug 'mattn/emmet-vim'
+" HTML
+Plug 'mattn/emmet-vim'
 
-  " JavaScript/TypeScript
-  Plug 'HerringtonDarkholme/yats.vim'
+" JavaScript/TypeScript
+Plug 'HerringtonDarkholme/yats.vim'
 
-  " Go
-  Plug 'sebdah/vim-delve'
+" Go
+Plug 'sebdah/vim-delve'
 
-  " Formatter
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'json', 'markdown', 'html'] }
-  Plug 'godlygeek/tabular'
+" Formatter
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'json', 'markdown', 'html'] }
+Plug 'godlygeek/tabular'
 call plug#end()
 
 set background=dark
@@ -105,17 +106,18 @@ colorscheme gruvbox
 
 " fzf
 let g:fzf_preview_window = ''
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \ 'rg --column --line-number --no-heading --color=always --smart-case ' . (<bang>0 ? '--fixed-strings ' : '') . <q-args>,
+      \ 1, fzf#vim#with_preview('up:40%:hidden', '?'), 1)
+
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <C-P> :GFiles --recurse-submodules<CR>
 nnoremap <Leader>m :Commands<CR>
-nnoremap <Leader>rg yiw:Rg <C-R>"<CR>
-nnoremap <Leader>rr yiw:Rg <C-R>" <C-R>%<C-F>
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+nnoremap <Leader>rg yiw:Rg! <C-R>"<CR>
+vnoremap <Leader>rg y:<c-u>Rg! '<C-R>"'<CR>
+nnoremap <Leader>rr yiw:Rg! <C-R>" <C-R>%
+vnoremap <Leader>rr y:<c-u>Rg! '<C-R>"' <C-R>%
 
 " Prettier
 let g:prettier#config#single_quote = 'false'
@@ -142,16 +144,8 @@ nmap <Leader>gb :Gblame<CR>
 
 " COC
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
 nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 Format :call CocAction('format')
 nmap <leader>f :Format<CR>
-"let g:coc_filetype_map = {
-"  \ 'tsx': 'typescript.tsx',
-"  \ }
-
-" Emmit
-let g:user_emmet_leader_key='<s-tab>'
