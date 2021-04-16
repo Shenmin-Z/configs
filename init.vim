@@ -149,3 +149,6 @@ nmap <silent> dn <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 Format :call CocAction('format')
 nmap <leader>f :Format<CR>
+
+" Emmet  
+let g:user_emmet_leader_key = '<C-K>'
