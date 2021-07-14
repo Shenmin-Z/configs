@@ -3,13 +3,14 @@ case "${unameOut}" in
   Linux*)     machine=Linux;;
   Darwin*)    machine=Mac;;
   CYGWIN*)    machine=Cygwin;;
-  MINGW*)     machine=MinGw;;
+  MINGW*)     machine=Windows;;
+  MSYS*)     machine=Windows;;
   *)          machine="UNKNOWN:${unameOut}"
 esac
 
 if [ "$machine" == "Linux" ]; then
   configHome="$HOME/.config"
-elif [ "$machine" == "MinGw" ]; then
+elif [ "$machine" == "Windows" ]; then
   configHome="$HOME/AppData/Local"
 fi
 
