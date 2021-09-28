@@ -68,38 +68,51 @@ set noswapfile
 " ----------*---------- ----------*---------- ----------*---------- "
 
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+  Plug 'morhetz/gruvbox'
 
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'google/vim-searchindex'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'scrooloose/nerdtree'
+  Plug 'google/vim-searchindex'
 
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
 
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'Raimondi/delimitMate'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'Raimondi/delimitMate'
 
-" Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'editorconfig/editorconfig-vim'
 
-" HTML
-Plug 'mattn/emmet-vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':tsupdate'}
 
-" JavaScript/TypeScript
-Plug 'HerringtonDarkholme/yats.vim'
+  " Completion
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Go
-Plug 'sebdah/vim-delve'
+  " HTML
+  Plug 'mattn/emmet-vim'
 
-" Formatter
-Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'json', 'markdown', 'html'] }
-Plug 'godlygeek/tabular'
+  " Go
+  Plug 'sebdah/vim-delve'
+
+  " Nginx
+  Plug 'chr4/nginx.vim'
+
+  " Formatter
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'typescriptreact', 'css', 'json', 'markdown', 'html'] }
+  Plug 'godlygeek/tabular'
 call plug#end()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"javascript", "typescript"},
+  highlight = {
+    enable = true,
+  },
+}
+EOF
 
 set background=dark
 colorscheme gruvbox
@@ -140,7 +153,7 @@ nmap <Leader>nc :NERDTreeClose<CR>
 nmap <Leader>nv :NERDTreeVCS<CR>
 
 " Fugitive
-nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gb :Git blame<CR>
 
 " COC
 nmap <silent> gd <Plug>(coc-definition)
