@@ -4,16 +4,19 @@ case "${unameOut}" in
   Darwin*)    machine=Mac;;
   CYGWIN*)    machine=Cygwin;;
   MINGW*)     machine=Windows;;
-  MSYS*)     machine=Windows;;
+  MSYS*)      machine=Windows;;
   *)          machine="UNKNOWN:${unameOut}"
 esac
 
 if [ "$machine" == "Linux" ]; then
   configHome="$HOME/.config"
-elif [ "$machine" == "Windows" ]; then
-  configHome="$HOME/AppData/Local"
-fi
 
-rm $configHome/nvim/init.vim $configHome/nvim/coc-settings.json
-ln -sf $(pwd)/init.vim $configHome/nvim/init.vim
-ln -sf $(pwd)/coc-settings.json $configHome/nvim/coc-settings.json
+  rm -f $configHome/nvim/init.vim
+  ln -sf $(pwd)/init.vim $configHome/nvim/init.vim
+elif [ "$machine" == "Windows" ]; then
+  # windows needs admin
+  configHome="$HOME/AppData/Local"
+
+  rm -f $configHome/nvim/init.vim $configHome/nvim/ginit.vim
+  cmd.exe /c symlink.bat
+fi

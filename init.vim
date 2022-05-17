@@ -86,8 +86,6 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'editorconfig/editorconfig-vim'
 
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':tsupdate'}
-
   " Completion
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -104,15 +102,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'typescriptreact', 'css', 'json', 'markdown', 'html'] }
   Plug 'godlygeek/tabular'
 call plug#end()
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"javascript", "typescript"},
-  highlight = {
-    enable = true,
-  },
-}
-EOF
 
 set background=dark
 colorscheme gruvbox
@@ -139,6 +128,7 @@ nnoremap gp :silent %!prettier --no-config --stdin --stdin-filepath % --trailing
 
 " NerdCommenter
 let g:NERDDefaultAlign = 'left'
+let g:NERDSpaceDelims = 1
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
 
